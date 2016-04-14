@@ -16,6 +16,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
+RUTA_PROYECTO= os.path.dirname(os.path.realpath(__file__))
 
 
 # Quick-start development settings - unsuitable for production
@@ -30,7 +31,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 ADMINS = (
-    ('root', 'emailxx@gmail.com'),
+    ('elk1o', ''),
 )
 
 MANAGERS = ADMINS
@@ -89,14 +90,24 @@ WSGI_APPLICATION = 'starting_django.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', #'ENGINE': 'django.db.backends.sqlite3' Para SQLITE
-        'NAME': 'database-name',
-        'USER': 'database-user',
-        'PASSWORD': 'database-pasw',
-        'HOST': 'database-host',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'pruebas_python',
+        'USER': 'root',
+        'PASSWORD': 'ioQwscQS',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }
+'''
+'ENGINE': 'django.db.backends.sqlite3',
+'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+'ENGINE': 'django.db.backends.mysql',
+'NAME': 'testpython',
+'USER': 'root',
+'PASSWORD': 'ioQwscQS',
+'HOST': '127.0.0.1',
+'PORT': '3306',
+'''
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -115,38 +126,40 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT,'templates'),)
+#ficheros adicionales localización de ficheros estáticos  /home/html/static  o www/django/static
+STATIC_URL = '/static/'
+# TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT,'templates'),)
+TEMPLATE_DIRS = ('../home/elk1o/Workspace/starting_django/starting_django/templates',)
+'''
+
 MEDIA_ROOT = '/starting_django/starting_django/comunes'
 MEDIA = '/starting_django/starting_django/comunes/img'
 MEDIA_URL = '../'
 STATIC_URL = '/static/'
 PLANTILLAS = '/starting_django/application1/templates/'
-
-#ficheros adicionales localización de ficheros estáticos  /home/html/static  o www/django/static
-STATIC_URL = '/static/'
-
 STATIC_ROOT = str(os.path.join(BASE_DIR, 'static'))
 
 STATICFILES_DIRS = (
-#os.path.join(BASE_DIR, "static"),
-#os.path.join(BASE_DIR, 'events/static'),
-#os.path.join(PROJECT_ROOT, 'static'),
+os.path.join(BASE_DIR, "static"),
+os.path.join(BASE_DIR, 'events/static'),
+os.path.join(PROJECT_ROOT, 'static'),
 )
-'''
-
-STATICFILES_DIRS = (
- os.path.join(PROJECT_ROOT, 'static')
-)
-STATIC_ROOT='static'
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.DefaultStorageFinder',
     'django.contrib.staticfiles.finders.FileSystemFinders',
     'django.contrib.staticfiles.finders.AppDirectoriesFinders',
 )
-
 '''
 
+'''
+STATICFILES_DIRS = (
+ os.path.join(PROJECT_ROOT, 'static')
+)
+STATIC_ROOT='static'
+'''
+
+'''
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
@@ -164,7 +177,7 @@ LOGGING = {
     },
 
 }
-
+'''
 
 
 

@@ -17,6 +17,7 @@ from django.conf.urls import include, url, patterns
 from django.contrib import admin
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+# from application1.views import index
 from application1.views import index, detalle, categorias
 admin.autodiscover() #Método de las URLS para mapear en base a la config
 
@@ -26,10 +27,13 @@ urlpatterns = [
 ]
 '''
 
-urlpatterns = patterns ('',
+urlpatterns = patterns('',
+    #----1ªforma
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    (r'^index$', index) ,
-    (r'^detalle$', detalle) ,
-    (r'^categorias/(?P<categoria_id>\d+)/$', categorias) ,
+    url(r'^$', index),
+    #---2ªforma
+    (r'^index$', index),
+    (r'^detalle$', detalle),
+    (r'^categorias/(?P<categoria_id>\d+)/$', categorias),
     )
