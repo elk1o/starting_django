@@ -1,10 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}
+Espectáculos
+{% endblock %}
+{% load staticfiles %}
+<h1> ESPECTACULOS </h1>
+<hr>
+{% block content %}
+<!--
+    Mostrar un listado de espectÁculos disponibles  por ejemplo para cine  ACCION, DRAMA, POLICIACA
+    DOS BOTONES UNO PARA MOSTRAR LA FICHA DEL ESPECTACULO EL SEGUNDO BOTON OCULTA LA FICHA
+    EL PROPIO ESPECTACULO NOS LLEVARA A UNA FICHA EN OTRA PÁGINA MAS DETALLADA CON IMAGEN DE SU CARTELERA
+    REGRESAR AL INDEX
+-->
 
-</body>
-</html>
+    {% if show %}
+         <h3>LISTADO DE LAS ESPECTÁCULOS DISPONIBLES</h3>
+        <br>
+<table>
+    <tr>
+{% for x in show %}
+
+        <td><a href="/espectaculos/{{ x.id }}/">{{ x.espectaculo }}</a></td>
+        <td>Nombre: {{ x.espectaculo }} <br>
+        Fecha : {{ x.hora }} <br>
+        Descripcion: {{ x.descripcion }} <br>
+        Recaudacion: {{ x.recaudacion }} <br>
+        Vendidas:    {{ x.vendidas }} <br>
+        Imagen: <img src="{% static "25fok.JPG" %}" alt=""> <br>
+        Aforo completo: {{ x.aforo_completo }} <br>
+        </td>
+        <td>
+
+            <input type="button" name="xx" value="Ver" onclick="actual({{x.id}}); mostrar();" /> </td>
+</tr>
+        {% endfor %}
+</table>
+    {% else %}
+
+        <h3> Show no disponible </h3>
+
+    {% endif %}
+
+    <a href="/index"> Inicio </a> <br>
+
+    <a href="/ficha1"> http://starting_django/starting_django/templates/ficha1.html </a>
+{% endblock %}
+
+
+{% block javascripts %}
+<script>
+    function actual(id)
+    {
+
+    }
+</script>
+{% endblock%}

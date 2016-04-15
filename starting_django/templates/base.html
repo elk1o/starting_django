@@ -4,10 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
+    <script src="{% static 'js/main.js' %}" ></script>
 </head>
 <body>
 Hi, this is base.html
 {% block content %}
 {% endblock %}
 </body>
+{% block javascripts %}
+{% endblock %}
 </html>

@@ -9,8 +9,6 @@ from application1.models import Categoria, Espectaculo, Lugar
 
 # Create your views here.
 def index(request):
-    print(settings.RUTA_PROYECTO)
-    print(settings.PROJECT_ROOT)
     categories = Categoria.objects.all()
     return render_to_response('index.html', {'categories': categories})
 
@@ -18,5 +16,11 @@ def detalle(request, categoria_id):
     return HttpResponse('detalle %s' % categoria_id)
 
 def categorias(request, categoria_id):
+    print(settings.BASE_DIR)
     show = Espectaculo.objects.filter(id=categoria_id)
     return render_to_response('espectaculos.html',{'show':show})
+
+def espectaculos(request, espectaculo_id):
+    print(settings.BASE_DIR)
+    espectaculos = Espectaculo.objects.all()
+    return render_to_response('detalle_evento.html',{'espectaculos':espectaculos})

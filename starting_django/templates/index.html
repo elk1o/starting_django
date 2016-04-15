@@ -2,7 +2,41 @@
 {% block title %}
 index
 {% endblock %}
-
+<h1> CATEGORIAS DE ESPECTACULOS</h1>
+<hr>
 {% block content %}
-hi, this is index.html
+
+    {% if categories %}
+         <h3>LISTADO DE LAS CATEGORIAS DISPONIBLES</h3>
+        {% for x in categories %}
+
+        <li><a href="/categorias/{{ x.id }}">[ {{ x.categoria }} ]</a></li>
+
+        {% endfor %}
+
+    {% else %}
+
+        <h3> Categoría no disponible </h3>
+
+    {% endif %}
+<h3> BUSQUEDAS</h3>
+    #Búsqueda directa en google - navegadores
+    <form action="http://www.google.com/search" method="get">
+        <input type=hidden name=ie value=UTF-8>
+        <input type=hidden name=oe value=UTF-8>
+        <table>
+            <tr>
+                <td> <a href="http://www.google.com"> <img src="http://www.google.com/logos/Logo_40wht.gif" alt="Google"> </a></td>
+                <td>
+                    <input type=text name=q size=31 maxlength=255 value="">
+                    <input type=submit name=btnG value="Buscar">
+                    <input type=hidden name=domains value="www.google.com">
+                </td>
+                
+            </tr>
+        </table>
+    </form>
+
+<hr>
+    <a href="/ficha1"> http://starting_django/starting_django/templates/ficha1.html </a>
 {% endblock %}

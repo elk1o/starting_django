@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 # from application1.views import index
-from application1.views import index, detalle, categorias
+from application1.views import index, detalle, categorias, espectaculos
 admin.autodiscover() #Método de las URLS para mapear en base a la config
 
 '''
@@ -36,4 +36,5 @@ urlpatterns = patterns('',
     (r'^index$', index),
     (r'^detalle$', detalle),
     (r'^categorias/(?P<categoria_id>\d+)/$', categorias),
+    (r'^espectaculos/(?P<espectaculo_id>\d+)/$', espectaculos),
     )
