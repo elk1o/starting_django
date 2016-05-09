@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {{ query }}
+    {% if error %}
+    <p style="color:red">Ha ocurrido un error, por favor ingrese los datos correctamente</p>
+    {% else %}
+
+    {% if categorias %}
+    <p> Categorías encontradas: {{ categorias|length }} </p>
+    <p> Categoría: {{ categorias|pluralize }} </p>
+    <ul>
+        {% for categorias in categorias %}
+        <li>{{ categorias.categoria }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% endif %}
+</body>
+</html>
