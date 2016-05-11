@@ -6,6 +6,8 @@ from django.conf import settings              #Importar configuracion del ficher
 from django.http import HttpResponseRedirect      #Importar respuestas directas al protocolo http (Páginas al vuelo: Ej: cad = "<html>[...]<h1>hola!</h1>[...]</html>")
 from django.template import RequestContext        #Comunicación M+C con V
 from application1.models import Categoria, Espectaculo, Lugar
+from application1.forms import Formulario1
+from django.core.mail import send_mail, EmailMessage
 import sys
 import datetime
 
@@ -73,6 +75,7 @@ def info_navegador1(request):
         info = "Desconocido"
     return HttpResponse("<table border=1>%s</table>" % "\n".join(html))
 
+# formularios implícitos en plantilla -----------------------------------------------------------
 def formulario_busqueda(request):
     return render(request, "formulario1.html")
 
@@ -99,3 +102,44 @@ def formulario_busqueda2(request):
             return render(request, "gracias.html", {"categorias":categorias, "query":q })
     return render(request,"gracias.html", {"error": error})
 
+# formularios explícitos (Clase-Plantilla)--------------------------------------------------------
+def formulario1(request):
+     if request.method == 'POST':
+        formu = Formulario1(request.POST)
+        print(str(formu))
+        if formu.is_valid():
+            return HttpResponseRedirect('/gracias1')
+        else:
+             formu = Formulario1()
+        return render(request, 'formulario_backend.html', {'formu': formu} )
+
+     formu = Formulario1()
+     return render(request, 'formulario_backend.html', {'formu': formu})
+
+def gracias(request):
+    msg = "<html><head></head><body>Gracias :) </body></html>"
+    return HttpResponse(msg)
+
+def contactos(request):
+    errors = []
+    if request.method == 'POST':
+        if not request.POST.get('nombre', ''):
+            errors.append('Campo nombre vacío')
+
+        if not request.POST.get('mensaje', ''):
+            errors.append('Campo mensaje vacío')
+
+        if not request.POST.get('email', '') and '@' not in request.POST['email']:
+            errors.append('Dirección inválida de email')
+
+        if not errors:
+            send_mail(request.POST['nombre'],request.POST['mensaje'], 'e.flores@gobalo.es', [request.POST['email']],)
+            #envia= EmailMessage()
+            #envia.send()
+            return gracias(request)
+        print(errors)
+        formu = Formulario1()
+        return render(request, 'formulario_backend.html', {'errors': errors, 'formu':formu})
+    else:
+        formu=Formulario1()
+        return render(request, 'formulario_backend.html', {'errors': errors, 'formu':formu})

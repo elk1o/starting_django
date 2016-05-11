@@ -18,7 +18,8 @@ from django.contrib import admin
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 # from application1.views import index
-from application1.views import index, detalle, categorias, espectaculos, informa, hola, horas_adelante, info_navegador, info_navegador1, formulario_busqueda, formulario_busqueda1
+#from application1.views import index, detalle, categorias, espectaculos, informa, hola, horas_adelante, info_navegador, info_navegador1, formulario_busqueda, formulario_busqueda1
+from application1.views import *
 admin.autodiscover() #Método de las URLS para mapear en base a la config
 
 '''
@@ -44,5 +45,13 @@ urlpatterns = patterns('',
     url(r'^ejemplo/mas/(\d{1,2})/$', horas_adelante),
     url(r'^test_navegador/$', info_navegador1),
     url(r'^formulario/$', formulario_busqueda),
+    # url(r'^formulario/$', formulario_busqueda1),
+    # url(r'^formulario/$', formulario_busqueda2),
     url(r'^gracias/$', formulario_busqueda1),
+
+    #Formularios explícitos en backend
+    url(r'^formulario1/$', formulario1),
+    url(r'^gracias1/$', gracias),
+
+    url(r'^contactos/$', contactos),
     )
