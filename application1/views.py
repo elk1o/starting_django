@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect      #Importar respuestas directas 
 from django.template import RequestContext        #Comunicación M+C con V
 from application1.models import Categoria, Espectaculo, Lugar
 from application1.forms import Formulario1
-from django.core.mail import send_mail, EmailMessage
+from django.core.mail import send_mail, EmailMessage   #pertenecen al módulo smtplib(Django library)
 import sys
 import datetime
 
@@ -143,3 +143,23 @@ def contactos(request):
     else:
         formu=Formulario1()
         return render(request, 'formulario_backend.html', {'errors': errors, 'formu':formu})
+
+
+def contactos_datoslimpios(request):
+    if request.method == 'POST':
+        formu = Formulario1(request.POST)
+        if formu.is_valid():
+            cd= formu.cleaned_data
+            send_mail(
+                cd['nombre'],
+                cd['mensaje'],
+                cd.get('email', 'e.flores@gobalo.es'), #En vez de coger del formulario, asigna valor al campo
+                ['test@test.com'],
+            )
+            return HttpResponseRedirect('/gracias1/')
+        else:
+            # print(formu.errors)
+            return render(request, 'formulario_backend.html', {'formu': formu, 'errors': formu.errors})
+    else:
+        formu= Formulario1()
+        return render(request, 'formulario_backend.html', {'formu':formu})

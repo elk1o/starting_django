@@ -53,5 +53,6 @@ urlpatterns = patterns('',
     url(r'^formulario1/$', formulario1),
     url(r'^gracias1/$', gracias),
 
-    url(r'^contactos/$', contactos),
+    # url(r'^contactos/$', contactos),
+    url(r'^contactos/$', contactos_datoslimpios),
     )
