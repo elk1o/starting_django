@@ -153,13 +153,17 @@ def contactos_datoslimpios(request):
             send_mail(
                 cd['nombre'],
                 cd['mensaje'],
-                cd.get('email', 'e.flores@gobalo.es'), #En vez de coger del formulario, asigna valor al campo
-                ['test@test.com'],
+                'test@test.com',
+                ['e.flores@gobalo.es'],
+                # cd.get('email', 'e.flores@gobalo.es'),  # En vez de coger del formulario, asigna valor al campo
             )
             return HttpResponseRedirect('/gracias1/')
         else:
             # print(formu.errors)
             return render(request, 'formulario_backend.html', {'formu': formu, 'errors': formu.errors})
+            # formu = Formulario1(initial={'nombre':'asunto por defecto'})
+            # return render(request,'formulario_backend.html',{formu:'formu'})
     else:
         formu= Formulario1()
+        # formu = Formulario1(initial={'nombre': 'asunto por defecto'})
         return render(request, 'formulario_backend.html', {'formu':formu})
