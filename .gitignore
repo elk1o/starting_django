@@ -3,3 +3,4 @@ starting_django/settings.py
 *.pyc
 /testenv/
 .*
+installed

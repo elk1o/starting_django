@@ -5,8 +5,14 @@ from django.contrib.auth.models import User
 #ORM no tienes que utilizar sentencias sql  clase POCO/POJO
 
 class Categoria(models.Model):
-    categoria= models.CharField(max_length=25)
-    borrado= models.CharField(max_length=1)
+
+    categoria= models.CharField(
+        max_length=25,
+    )
+
+    borrado= models.CharField(
+        max_length=1,
+    )
 
     def __unicode__(self):
         return self.categoria
@@ -19,8 +25,14 @@ class Categoria(models.Model):
         pass
 
 class Lugar(models.Model):
-    lugar = models.CharField(max_length=25)
-    borrado = models.CharField(max_length=1)
+
+    lugar = models.CharField(
+        max_length=25,
+    )
+
+    borrado = models.CharField(
+        max_length=1,
+    )
 
     def __unicode__(self):
         return u'%s %s' % (self.categoria, self.borrado)
@@ -29,33 +41,55 @@ class Lugar(models.Model):
         pass
 
 class Espectaculo(models.Model):
-    espectaculo = models.CharField(max_length=30)
+
+    espectaculo = models.CharField(
+        max_length=30,
+    )
+
     fecha = models.DateField()
+
     hora = models.DateTimeField()
-    descripcion = models.CharField(max_length=255)
-    recaudacion = models.DecimalField(decimal_places=2, max_digits=10)
+
+    descripcion = models.CharField(
+        max_length=255,
+    )
+
+    recaudacion = models.DecimalField(
+        decimal_places=2,
+        max_digits=10,
+    )
+
     vendidas = models.IntegerField()
-    imagen = models.CharField(max_length=255)
+
+    imagen = models.CharField(
+        max_length=255,
+    )
+
     aforo_completo = models.BooleanField()
+
     '''Foreign keys '''
     categoria = models.ForeignKey(Categoria)
+
     lugar = models.ForeignKey(Lugar)
     ''' .BigIntegerField(), CommaSeparatedIntegerField(), EmailField(), FileField(),
      FilePathField(), FloatField(), ImageField() -> BLOB binary, IPAdressField(),
      GenericIPAdressField(), ManyToManyField(), NullBooleanField(), PhoneNumberField(), PositiveIntegerField(), TextField()
      tipos int    tiny o byte  small medium  large huge mongous    IntegerField, PositiveSmallIntegerField PositiveIntegerField(), SlugField()
      '''
-#CLASE TICKET  pin, fecha, hora, numero
 
-#CLASE CLIENTE telefono, saldo
+class Ticket(models.Model):
 
-#clase precio
+    pin = models.CharField(
+        max_length=50,
+        verbose_name='Pin',
+    )
 
-#clase sector
+    fecha = models.DateTimeField(
+        auto_now_add=True, #Añade automáticamente la fecha en la que es creado el registro
+        verbose_name='Fecha',
+    )
 
-#clase asiento
+    # numero = models.AutoField(primary_key=True) No tiene sentido, a no ser que se aplique primary_key=True
 
-
-# hacer la migracion
 
 

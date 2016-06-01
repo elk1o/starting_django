@@ -55,4 +55,11 @@ urlpatterns = patterns('',
 
     # url(r'^contactos/$', contactos),
     url(r'^contactos/$', contactos_datoslimpios),
-    )
+
+    #Cookies
+    url(r'^cookies/$', cookies),
+
+    #Sesiones
+    url(r'^sesion/$', session),
+
+)

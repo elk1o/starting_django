@@ -167,3 +167,50 @@ def contactos_datoslimpios(request):
         formu= Formulario1()
         # formu = Formulario1(initial={'nombre': 'asunto por defecto'})
         return render(request, 'formulario_backend.html', {'formu':formu})
+
+def cookies(request):
+    # setCookiesValue(request, 'color', 'rojo')
+    print(request.COOKIES)
+    #Mostrar cookie
+    if 'color' in request.COOKIES:
+        return HttpResponse('Color favorito %s' % request.COOKIES['color'])
+    else:
+        return HttpResponse('No ha sido asignado ningun color')
+
+
+#Asignar cookies
+def setCookiesValue(request, clave, valor):
+    if clave not in request.COOKIES:
+        print('no hay cookie de color. Asignando.......')
+        # 1ª forma
+        request.COOKIES[clave] = valor
+        # 2ª forma
+        # respuesta = HttpResponse()
+        # respuesta.set_cookie(clave, valor)
+    else:
+        return HttpResponse('Color ya asignado')
+    pass
+
+
+def session(request):
+    set_session_value(request, 'color', 'grey')
+    # destroy_session_value(request, 'color')
+    print(request.session)
+    #Mostrar cookie
+    if 'color' in request.session:
+        return HttpResponse('Color favorito <span style="color:%s;"> %s </span>' % (request.session['color'], request.session['color']))
+    else:
+        return HttpResponse('No ha sido asignado ningun color')
+
+
+#Asignar variable de sesión
+def set_session_value(request, clave, valor):
+    if clave not in request.session:
+        request.session[clave] = valor
+        # request.session['clave1']['clave11'] = valor
+
+
+#Asignar variable de sesión
+def destroy_session_value(request, clave):
+    if clave in request.session:
+        del request.session[clave]
