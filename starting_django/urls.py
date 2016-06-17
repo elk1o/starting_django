@@ -62,4 +62,7 @@ urlpatterns = patterns('',
     #Sesiones
     url(r'^sesion/$', session),
 
+    #Django REST Framework
+    # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+
 )

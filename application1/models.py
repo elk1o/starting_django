@@ -12,9 +12,13 @@ class Categoria(models.Model):
 
     borrado= models.CharField(
         max_length=1,
+        default=u'1'
     )
 
     def __unicode__(self):
+        return self.categoria
+
+    def __str__(self):
         return self.categoria
 
     class Admin:
@@ -34,11 +38,19 @@ class Lugar(models.Model):
         max_length=1,
     )
 
-    def __unicode__(self):
-        return u'%s %s' % (self.categoria, self.borrado)
+    class Meta:
+        #Pluralización en el admin
+        verbose_name_plural = "Lugares"
+        #Ordena los datos por orden ascendente
+        ordering = ["-id"]
+        pass
 
     class Admin:
+        list_display = ('Id', 'Lugar', 'borrado')
         pass
+
+    def __unicode__(self):
+        return u'%s %s' % (self.categoria, self.borrado)
 
 class Espectaculo(models.Model):
 

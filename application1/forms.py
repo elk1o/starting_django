@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import forms   # se rescribio el newforms
+from .models import Categoria
 
 # class Formulario1(forms.Form):
 #     asunto = forms.CharField()
@@ -24,5 +25,18 @@ class Formulario1(forms.Form):
 
     # clean_telefono o lo que sea
 
+
+class FormCategoria(forms.ModelForm):
+
+    def clean_categoria(self):
+        categoria= self.cleaned_data['categoria']
+        num_palabras= len(categoria.split())
+        if num_palabras > 1:
+            raise forms.ValidationError("Es necesario introducir solo 1 palabra")
+        return categoria
+
+    class Meta:
+        model = Categoria
+        fields = ['categoria',]
 
 

@@ -109,8 +109,8 @@ def formulario1(request):
         print(str(formu))
         if formu.is_valid():
             return HttpResponseRedirect('/gracias1')
-        else:
-             formu = Formulario1()
+        #else:
+        #     formu = Formulario1()
         return render(request, 'formulario_backend.html', {'formu': formu} )
 
      formu = Formulario1()
