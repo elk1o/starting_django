@@ -63,6 +63,6 @@ urlpatterns = patterns('',
     url(r'^sesion/$', session),
 
     #Django REST Framework
-    # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
-
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^espectaculo/', include('application1.urls')),
 )

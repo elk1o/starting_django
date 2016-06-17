@@ -8,6 +8,8 @@ from django.template import RequestContext        #Comunicación M+C con V
 from application1.models import Categoria, Espectaculo, Lugar
 from application1.forms import Formulario1
 from django.core.mail import send_mail, EmailMessage   #pertenecen al módulo smtplib(Django library)
+from rest_framework import generics
+from application1.serializers import EspectaculoSerializer
 import sys
 import datetime
 
@@ -214,3 +216,14 @@ def set_session_value(request, clave, valor):
 def destroy_session_value(request, clave):
     if clave in request.session:
         del request.session[clave]
+
+
+# -------------------------------- RESTFUL ---------------------------------------
+class EspectaculoList(generics.ListCreateAPIView):
+    queryset = Espectaculo.objects.all()
+    serializer_class = EspectaculoSerializer
+
+
+class EspectaculoDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Espectaculo.objects.all()
+    serializer_class = EspectaculoSerializer
