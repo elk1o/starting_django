@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        ul.errorlist
+        {
+            color:red;
+        }
+        .errorlist li
+        {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% if errors %}
+        {{ errors }}
+        {% endif %}
+
+        <!--{{ formu.as_p }}-->
+        <!--{{ formu.as_table }}-->
+        {{ formu.as_ul }}
+
+        <!--Nombre: {{ formu.nombre }}-->
+        <!--Email: {{ formu.email }}-->
+        <!--Mensaje: {{ formu.mensaje }}-->
+        <!--Telefono: {{ formu.telefono }}-->
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>
